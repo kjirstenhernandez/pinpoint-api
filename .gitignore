@@ -1,0 +1,50 @@
+# Ignore build output directories
+bin/
+obj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+
+# Backup & temporary files
+*.bak
+*.swp
+*.tmp
+*.temp
+*.tmp
+
+# Package directories
+packages/
+.vscode/
+
+# Rider project files
+.idea/
+*.sln.iml
+
+# Visual Studio Code settings
+.vscode/
+
+# DotNet specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Entity Framework Migrations
+Migrations/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
