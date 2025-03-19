@@ -133,5 +133,64 @@ namespace api.Controllers
 
             return NoContent(); // No content gives a 200 code, showing that the job was completed. 
         }
+
+// Read/Write Event Logs
+
+        // Write the brief report of all current events to a file
+        [HttpGet("brief/all")]
+        public async Task<IActionResult> GetAllBriefsAsync()
+        {
+            var allEvents = await _eventRepo.GetAllAsync(); // uses teh Get All method to retrieve all events in the database
+
+            if (allEvents == null)
+            {
+                return NotFound(); // if there are no events in teh database, return NotFound
+            }
+
+            var briefEvents = allEvents.Select(e => e.ToBriefEventDto()).ToList();
+
+            // Loop through and write all event details to a file
+            WriteMultipleEventsToFile(briefEvents);
+
+            return Ok(briefEvents);
+        }
+
+        private void WriteMultipleEventsToFile(List<BriefEventDto> events)
+        {
+            string path = "Logs/EventLogs.txt";
+
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+
+            using (StreamWriter writer = new StreamWriter(path, append: true))
+            {
+                foreach (var eventDto in events)
+                {
+                    writer.WriteLine($"{DateTime.Now}: {eventDto.id}, {eventDto.title}, {eventDto.date}, {eventDto.time}");
+                }
+            }
+        }
+
+        private List<string> ReadEventLogs()
+        {
+            string path = "Logs/EventLogs.txt";
+
+            if (!System.IO.File.Exists(path))
+                return new List<string>(); // Return empty if file doesn't exist
+
+            List<string> logs = new List<string>();
+
+            using (StreamReader reader = new StreamReader(path))
+            {
+                string? line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    logs.Add(line);
+                }
+            }
+
+            return logs;
+        }
+
+
     }
 }
