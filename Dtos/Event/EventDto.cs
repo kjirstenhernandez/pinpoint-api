@@ -7,6 +7,7 @@ using api.Models;
 
 namespace api.Dtos.Event
 {
+    // Basic Event DTO
     public class EventDto
     {
         public string id { get; set; } = string.Empty;
@@ -22,9 +23,7 @@ namespace api.Dtos.Event
         [MinLength(20, ErrorMessage = "Must be at least 10 characters")]
         [MaxLength(250, ErrorMessage = "Must be less than 100 characters")]
         public string address { get; set; } = string.Empty;
-        public double lat { get; set; }
-        public double lon { get; set; }
-        [Required]
+
         public EventType type { get; set; }
         [Required]
         [RegularExpression(@"^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/((19|20)\d\d)$", 

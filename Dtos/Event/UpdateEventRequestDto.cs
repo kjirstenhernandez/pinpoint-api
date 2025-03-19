@@ -7,6 +7,8 @@ using api.Models;
 
 namespace api.Dtos.Event
 {
+
+    // DTO for Event Updates
     public class UpdateEventRequestDto
     {
         [Required]

@@ -7,20 +7,19 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi();  // .NET 9.0 dropped support for swagger, OpenAPI being used for Scalar instead
 builder.Services.AddControllers().AddNewtonsoftJson(options => {
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;;
     });
     
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); // Connection for SQL Database
 });
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>(); // User Interface registration
+builder.Services.AddScoped<IEventRepository, EventRepository>(); // Event Interface registration
 
 var app = builder.Build();
 
@@ -28,7 +27,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference("/api-reference");
+    app.MapScalarApiReference("/api-reference"); // Scalar use instead of swagger, found at this alterenative was found at https://youtu.be/8yI4gD1HruY?si=hD56Xw5gNjQLpkcZ
 }
 
 app.UseHttpsRedirection();

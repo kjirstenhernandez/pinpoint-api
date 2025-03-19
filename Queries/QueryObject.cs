@@ -11,4 +11,6 @@ namespace api.Queries
         public string? Date {get; set;} = null;
         public string? Time {get; set;} = null;
     }
+
+    // In progress, will integrate into the Web API later. Using it for filtering. 
 }

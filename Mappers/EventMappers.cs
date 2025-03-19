@@ -13,12 +13,11 @@ namespace api.Mappers
         {
             return new EventDto
             {
+                // Shares the same information for an event, minus the longitude and latitude
                 id = eventModel.id,
                 title = eventModel.title,
                 description = eventModel.description,
                 address = eventModel.address,
-                lat = eventModel.lat,
-                lon = eventModel.lon,
                 date = eventModel.date,
                 time = eventModel.time,
                 type = eventModel.type,
@@ -31,6 +30,7 @@ namespace api.Mappers
         {
             return new Event
             {
+                // Event DTO that shares the same information for an event, minus the event id which will be auto-generated.
                 title = eventDto.title,
                 description = eventDto.description,
                 address = eventDto.address,

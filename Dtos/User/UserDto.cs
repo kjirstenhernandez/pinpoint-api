@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Dtos.Event;
-
+using api.Models;
 
 namespace api.Dtos.User
 {
+    // Basic User DTO blueprint with validation
     public class UserDto
+    
     {
         public string id { get; set; } = string.Empty;
         [Required]
@@ -28,10 +30,11 @@ namespace api.Dtos.User
         public int zipcode { get; set; }
         [Required]
         [EmailAddress(ErrorMessage = "Must be a valid email format: johndoe@example.com")]
+
         public string email { get; set; } = string.Empty;
         [Required]
         [Phone(ErrorMessage = "Must be a valid phone number format")]
         public string phone { get; set; } = string.Empty;
-        public List<EventDto> events { get; set; }
+        public List<EventDto> Events { get; set; }
     }
 }

@@ -14,14 +14,14 @@ namespace api.Data
             
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Event> Events { get; set; }
+        public DbSet<User> Users { get; set; } // Getting/setting the Users column in the database
+        public DbSet<Event> Events { get; set; } // Getting/setting the Events column in the database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           base.OnModelCreating(modelBuilder);
+           base.OnModelCreating(modelBuilder);  
 
-            modelBuilder.Entity<Event>()
+            modelBuilder.Entity<Event>() // creating a foreign-key relationship in teh database between Users and Events;  all events must be linked with a User's unique ID, and in the event the user is deleted their events will be as well.  
                 .HasOne(e => e.user)
                 .WithMany(u => u.Events)
                 .HasForeignKey (e => e.userId)
@@ -29,51 +29,3 @@ namespace api.Data
         }
     }
 };
-
-        //    var user1 = new User
-        //     {
-        //         id = "8800981e-d506-4462-9b76-4e653ade43b5",
-        //         firstName = "Alice",
-        //         lastName = "Johnson",
-        //         locLat = 40.7128,
-        //         locLon = -74.0060,
-        //         email = "alice@example.com",
-        //         phone = "123-456-7890"
-        //     };
-
-        //     var user2 = new User
-        //     {
-        //         id = "21ff28d2-dfb8-4397-a6d3-513363324cac",
-        //         firstName = "Bob",
-        //         lastName = "Smith",
-        //         locLat = 34.0522,
-        //         locLon = -118.2437,
-        //         email = "bob@example.com",
-        //         phone = "987-654-3210"
-        //     };
-
-        //     var event1 = new Event
-        //     {
-        //         id = "54dc5366-933f-4e39-87ac-6ec216014ce1",
-        //         title = "Tech Conference",
-        //         description = "A technology-focused convention.",
-        //         lat = 37.7749,
-        //         lon = -122.4194,
-        //         type = 0,
-        //         date = "Mar 30, 2025",
-        //         time = "15:30:00",
-        //         userId = user1.id
-        //     };
-
-        //     var event2 = new Event
-        //     {
-        //         id = Guid.NewGuid().ToString(),
-        //         title = "Music Festival",
-        //         description = "A fun outdoor festival.",
-        //         lat = 36.1627,
-        //         lon = -86.7816,
-        //         type = EventType.festival,
-        //         date = "Mar 30, 2025",
-        //         time = "15:30:00",
-        //         userId = user2.id
-        //     };

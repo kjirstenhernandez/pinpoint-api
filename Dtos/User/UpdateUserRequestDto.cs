@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace api.Dtos.User
 {
+    // DTO for User Update
     public class UpdateUserRequestDto
     {
         [Required]
@@ -25,6 +26,7 @@ namespace api.Dtos.User
         public int zipcode { get; set; }
         [Required]
         [EmailAddress(ErrorMessage = "Must be a valid email format: johndoe@example.com")]
+
         public string email { get; set; } = string.Empty;
         [Required]
         [Phone(ErrorMessage = "Must be a valid phone number format")]

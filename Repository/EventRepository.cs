@@ -14,52 +14,52 @@ namespace api.Repository
     {
         private readonly ApplicationDbContext _context;
         
-        public EventRepository(ApplicationDbContext context)
+        public EventRepository(ApplicationDbContext context) // Linking with the database
         {
             _context = context;
         }
 
-        public async Task<Event> CreateAsync(Event eventModel)
+        public async Task<Event> CreateAsync(Event eventModel)  // Creating a new event in the DB
         {
-            await _context.Events.AddAsync(eventModel);
-            await _context.SaveChangesAsync();
+            await _context.Events.AddAsync(eventModel); // New event is pending
+            await _context.SaveChangesAsync(); // New event is saved to DB. 
             return eventModel;
         }
 
-        public async Task<Event?> DeleteAsync(string id)
+        public async Task<Event?> DeleteAsync(string id)  // Deleting an event in teh DB
         {
-            var eventModel = await _context.Events.FirstOrDefaultAsync(x => x.id == id);
+            var eventModel = await _context.Events.FirstOrDefaultAsync(x => x.id == id);  // locale the event to be deleted.
             if (eventModel == null)
             {
                 return null;
             }
-            _context.Events.Remove(eventModel);
-            await _context.SaveChangesAsync();
+            _context.Events.Remove(eventModel); // prepare teh event to be deleted from the database
+            await _context.SaveChangesAsync(); // Save the deletion changes
             return eventModel;
         }
 
         public async Task<List<Event>> GetAllAsync()
         {
-            return await _context.Events.ToListAsync();
+            return await _context.Events.ToListAsync();  // Create a list of events
         }
 
-        public async Task<List<Event>> GetAllByUserAsync(string userId)
+        public async Task<List<Event>> GetAllByUserAsync(string userId) // Get a list of events created by the specified user
         {
-            return await _context.Events.Where(x => x.userId == userId).ToListAsync();
+            return await _context.Events.Where(x => x.userId == userId).ToListAsync(); 
         }
 
-        public async Task<Event?> GetByIdAsync(string id)
+        public async Task<Event?> GetByIdAsync(string id) // Get event details by the event's ID
         {
             return await _context.Events.FindAsync(id);
         }
 
-        public async Task<Event?> UpdateAsync(string id, UpdateEventRequestDto eventDto)
+        public async Task<Event?> UpdateAsync(string id, UpdateEventRequestDto eventDto) // Update information on an event based on info from teh provided DTO
         {
             var existingEvent = await _context.Events.FirstOrDefaultAsync(x => x.id == id);
             if (existingEvent == null){
                 return null;
             }
-
+                // take each column of the event pulled from teh DB, and update it with the information provided in the request body.  
                 existingEvent.title = eventDto.title;
                 existingEvent.description = eventDto.description;
                 existingEvent.address = eventDto.address;
@@ -69,8 +69,8 @@ namespace api.Repository
                 existingEvent.time = eventDto.time;
                 existingEvent.type = eventDto.type;
 
-                await _context.SaveChangesAsync();
-                return existingEvent;
+                await _context.SaveChangesAsync(); // save changes to DB
+                return existingEvent; 
         }
     }
 }

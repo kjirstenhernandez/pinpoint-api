@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace api.Dtos.User
 {
+    
+    //  DTO for User Creation and Validation
     public class CreateUserRequestDto
     {
         [Required]

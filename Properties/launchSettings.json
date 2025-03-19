@@ -5,7 +5,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://pinpoint-api-2205.azurewebsites.net",
+      "applicationUrl": "http://localhost:5024",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -14,7 +14,8 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "https://pinpoint-api-2205.azurewebsites.net",
+      "applicationUrl": "https://localhost:5024",
+
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

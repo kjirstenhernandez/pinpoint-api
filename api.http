@@ -1,4 +1,5 @@
-@api_HostAddress = https://pinpoint-api-2205.azurewebsites.net
+@api_HostAddress = localhost:5024
+# @api_HostAddress = https://pinpoint-api-2205.azurewebsites.net
 
 GET {{api_HostAddress}}/weatherforecast/
 Accept: lication/json
