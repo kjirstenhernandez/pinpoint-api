@@ -34,6 +34,8 @@ namespace api.Controllers
             var eventsModel = events.Select(s => s.ToEventDto());  // Processing the data into an event DTO
             return Ok(eventsModel);
         }
+
+        //Get all events by one user
         [HttpGet("user/{id}")]
         public async Task <IActionResult> GetAllByUser([FromRoute] string id)
         {
@@ -45,7 +47,24 @@ namespace api.Controllers
             var eventsModel = events.Select(s => s.ToEventDto()); // Processing the data into an event DTO
             return Ok(eventsModel);
         }
+        // Get a brief summary of the event
+        [HttpGet("brief/{id}")]
+        public async Task <IActionResult> GetBriefAsync([FromRoute] string id)
+        {
+            if (!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
 
+            var events = await _eventRepo.GetByIdAsync(id);
+
+            if (events == null){
+                return NotFound();
+            }
+
+            return Ok(events.ToBriefEventDto());
+        }
+
+        // Get the details of a specific event
         [HttpGet("{id}")]
         public async Task <IActionResult> GetById([FromRoute] string id) // Display event information by the event's ID
         {

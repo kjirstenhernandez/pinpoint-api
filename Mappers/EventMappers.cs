@@ -42,5 +42,17 @@ namespace api.Mappers
                 userId = eventDto.userId
             };
         }
+
+        public static BriefEventDto ToBriefEventDto(this Event eventModel)
+        {
+            return new BriefEventDto
+            { // returns an object that only shows a small portion of the full event for a smaller API response
+
+                id = eventModel.id,
+                title = eventModel.title,
+                date = eventModel.date,
+                time = eventModel.time
+            };
+        }
     }
 }
