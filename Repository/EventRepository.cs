@@ -68,6 +68,7 @@ namespace api.Repository
                 existingEvent.date = eventDto.date;
                 existingEvent.time = eventDto.time;
                 existingEvent.type = eventDto.type;
+                existingEvent.imageUrl = eventDto.imageUrl;
 
                 await _context.SaveChangesAsync(); // save changes to DB
                 return existingEvent; 

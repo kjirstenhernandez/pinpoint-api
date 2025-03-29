@@ -35,6 +35,7 @@ namespace api.Dtos.Event
         [RegularExpression(@"^(?:[01]\d|2[0-3]):[0-5]\d$", 
         ErrorMessage = "Invalid time format. Use HH:MM (24-hour format).")]
         public string time { get; set; } = string.Empty;
+        public string imageUrl {get; set;} = string.Empty;
 
     }
 }

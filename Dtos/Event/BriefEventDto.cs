@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace api.Dtos.Event
 {
     public struct BriefEventDto
+    // Creates a brief version of the Event, making it more lightweight for an API call
     {
         public string id {get; init;}
         public string title {get; init;}

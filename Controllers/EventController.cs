@@ -55,13 +55,13 @@ namespace api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var events = await _eventRepo.GetByIdAsync(id);
+            var events = await _eventRepo.GetByIdAsync(id); // gather the event data from the database
 
             if (events == null){
                 return NotFound();
             }
 
-            return Ok(events.ToBriefEventDto());
+            return Ok(events.ToBriefEventDto()); // return the event information using the brief DTO. 
         }
 
         // Get the details of a specific event
@@ -136,11 +136,11 @@ namespace api.Controllers
 
 // Read/Write Event Logs
 
-        // Write the brief report of all current events to a file
+        // Endpoint that produces a log of the brief on all events in teh database
         [HttpGet("brief/all")]
         public async Task<IActionResult> GetAllBriefsAsync()
         {
-            var allEvents = await _eventRepo.GetAllAsync(); // uses teh Get All method to retrieve all events in the database
+            var allEvents = await _eventRepo.GetAllAsync(); // uses the Get All method to retrieve all events in the database
 
             if (allEvents == null)
             {
@@ -155,6 +155,7 @@ namespace api.Controllers
             return Ok(briefEvents);
         }
 
+        // Creates the text file containing the briefs from all events in the database
         private void WriteMultipleEventsToFile(List<BriefEventDto> events)
         {
             string path = "Logs/EventLogs.txt";
@@ -163,13 +164,14 @@ namespace api.Controllers
 
             using (StreamWriter writer = new StreamWriter(path, append: true))
             {
-                foreach (var eventDto in events)
+                foreach (var eventDto in events) // takes each of the briefs and writes it out into the file with Today's Date: Id, title, event date, and event time 
                 {
                     writer.WriteLine($"{DateTime.Now}: {eventDto.id}, {eventDto.title}, {eventDto.date}, {eventDto.time}");
                 }
             }
         }
 
+        // Reads the logged event briefs into a list
         private List<string> ReadEventLogs()
         {
             string path = "Logs/EventLogs.txt";

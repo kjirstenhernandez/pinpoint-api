@@ -19,6 +19,7 @@ namespace api.Models
         public string time { get; set; } = string.Empty; // HH:00, 24 hour format
         public string userId { get; set; } = string.Empty; // navigation property    
         public User? user { get; set; } // user that created the event; using as a foreign key for cascade.  
+        public string imageUrl {get; set;} = string.Empty;
     }
 
     public enum EventType {

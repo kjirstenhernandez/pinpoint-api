@@ -21,7 +21,9 @@ namespace api.Mappers
                 date = eventModel.date,
                 time = eventModel.time,
                 type = eventModel.type,
-                userId = eventModel.userId
+                userId = eventModel.userId,
+                imageUrl = eventModel.imageUrl
+        
 
             };
         }
@@ -39,7 +41,8 @@ namespace api.Mappers
                 date = eventDto.date,
                 time = eventDto.time,
                 type = eventDto.type,
-                userId = eventDto.userId
+                userId = eventDto.userId,
+                imageUrl = eventDto.imageUrl
             };
         }
 

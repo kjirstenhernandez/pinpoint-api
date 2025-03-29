@@ -31,5 +31,6 @@ namespace api.Dtos.Event
         ErrorMessage = "Invalid time format. Use HH:MM (24-hour format).")]
         public string time { get; set; } = string.Empty;
         public string userId { get; set; } = string.Empty;
+        public string imageUrl {get; set;} = string.Empty;
     }
 }

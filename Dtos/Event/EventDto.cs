@@ -35,5 +35,7 @@ namespace api.Dtos.Event
         public string time { get; set; } = string.Empty;
         public string userId { get; set; } = string.Empty;
 
+        public string imageUrl {get; set;} = string.Empty;
+
     }
 }
