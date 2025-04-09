@@ -3,9 +3,15 @@ using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using api.Interfaces;
 using api.Repository;
+using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplicationInsightsTelemetry(options =>
+{
+    options.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
+});
 
 builder.Services.AddCors(options =>
 {
